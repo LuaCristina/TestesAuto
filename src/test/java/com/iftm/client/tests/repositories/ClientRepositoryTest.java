@@ -171,7 +171,8 @@ public class ClientRepositoryTest {
 		// comparar se os elementos retornados estão corretos.
 	}
 
-
+	//criar um método personalizado para buscar um cliente pelo seu nome. (Sugestão:
+	//Aplicar a função LOWER)
 	@Test
 	void testaBuscaClientesInicioNomeQueExiste() {
 		// definir cenário
@@ -191,7 +192,9 @@ public class ClientRepositoryTest {
 		}
 
 	}
-
+	//Vocês deverão retornar uma List<Client> contendo todos os clientes que
+	//apresentam no nome a palavra passada como parâmetro ao método. (utilizar
+	//Like)
 	@Test
 	void testaBuscaClientesNome() {
 		// definir cenário
@@ -208,6 +211,8 @@ public class ClientRepositoryTest {
 
 	}
 
+	//criar um método personalizado para buscar os clientes que tenham data de
+	//nascimento em uma determinada faixa de valores.
 	@Test
 	void clientesComDataEntreAnos() {
 		// definir cenário
@@ -228,6 +233,8 @@ public class ClientRepositoryTest {
 		}
 	}
 
+	// um para buscara clientes que tenham salários em uma determinada faixa de
+	//valores
 	@Test
 	void clientesSalario() {
 		// definir cenário
@@ -247,4 +254,49 @@ public class ClientRepositoryTest {
 			Assertions.assertEquals(nomesEsperados[i], listaClientes.get(i).getName());
 		}
 	}
+
+
+// ▪ um para buscar clientes com salários superiores a um valor.
+	@Test
+	void clientesSalarioAlto() {
+		// definir cenário
+		double salarioI = 9999.0;
+		int tamanhoEsperado = 1;
+		String nomesEsperados[] = {"Toni Morrison"};
+
+		//execução do método que está sendo testado
+		List<Client> listaClientes = repositorio.findByIncomeGreaterThan(salarioI);
+
+		//comparação
+		// existe elementos na lista
+		Assertions.assertFalse(listaClientes.isEmpty());
+		Assertions.assertEquals(tamanhoEsperado, listaClientes.size());
+		for (int i = 0; i < nomesEsperados.length; i++) {
+			Assertions.assertEquals(nomesEsperados[i], listaClientes.get(i).getName());
+		}
+	}
+
+	// ▪ um para buscar clientes com salários inferiores a um valor.
+	@Test
+	void clientesSalarioBaixo() {
+		// definir cenário
+		double salarioI = 1500.0;
+		int tamanhoEsperado = 1;
+		String nomesEsperados[] = {"Jorge Amado"};
+
+		//execução do método que está sendo testado
+		List<Client> listaClientes = repositorio.findByIncomeLessThan(salarioI);
+
+		//comparação
+		// existe elementos na lista
+		Assertions.assertFalse(listaClientes.isEmpty());
+		Assertions.assertEquals(tamanhoEsperado, listaClientes.size());
+		for (int i = 0; i < nomesEsperados.length; i++) {
+			Assertions.assertEquals(nomesEsperados[i], listaClientes.get(i).getName());
+		}
+	}
+
+
+
+
 }
